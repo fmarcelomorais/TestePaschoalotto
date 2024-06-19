@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Entity
+    public class Dob 
     {
-        public Guid Identificado { get; set; }
-
-        public Entity()
-        {
-            Identificado = Guid.NewGuid();
-        }
+        public Guid Id { get; set; }
+        public DateTime Date { get; set; }
+        public int Age { get; set; }
     }
-
 }
+

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Picture
+    public class Name
     {
         public Guid Id { get; set; }
-        public string Large { get; set; }
-        public string Medium { get; set; }
-        public string Thumbnail { get; set; }
+        public string Title { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
     }
 }

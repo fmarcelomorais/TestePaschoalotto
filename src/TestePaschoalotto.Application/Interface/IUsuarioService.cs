@@ -4,8 +4,8 @@ namespace TestePaschoalotto.Application.Interface
 {
     public interface IUsuarioService
     {
-        Task CadastraUsuario(UsuarioDTOCreate usuarioDTO);
+        Task CadastraUsuario(UsuarioDTO usuarioDTO);
         Task<UsuarioDTO> ObterUsuarios();
-        Task EditarUsuario(UsuarioDTOCreate usuarioDTOCreate);
+        Task EditarUsuario(UsuarioDTO usuarioDTO);
     }
 }

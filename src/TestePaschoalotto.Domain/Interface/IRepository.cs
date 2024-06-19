@@ -7,7 +7,7 @@ using TestePaschoalotto.Domain.Model;
 
 namespace TestePaschoalotto.Domain.Interface
 {
-    public interface IRepository<TEntity> where TEntity : Entity
+    public interface IRepository<TEntity> 
     {
         Task<TEntity> Create(TEntity entity);
         Task<TEntity> Update(TEntity entity);

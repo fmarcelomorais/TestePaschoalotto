@@ -4,6 +4,7 @@ using TestePaschoalotto.Application.Servicos;
 using TestePaschoalotto.Domain.Interface;
 using TestePaschoalotto.Infraestrutura.Context;
 using TestePaschoalotto.Infraestrutura.Repositories;
+using TestePaschoalotto.Application.Mapper;
 
 
 
@@ -14,14 +15,12 @@ namespace TestePaschoalotto.CrossCutting.IoC
         public static IServiceCollection AddDependecyInjection(this IServiceCollection services) 
         {
             services.AddDbContext<ApplicationContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
-            services.AddScoped<INaturalizationRepository, NaturalizationRepository>();
-            services.AddScoped<IContactRepository, ContactRepository>();
-            services.AddScoped<IPictureRepository, PictureRepository>();
-            services.AddScoped<IUsuarioService, UsuarioService>();
-           // services.AddScoped<IRandomUserService, RandomUserService>();
+            services.AddScoped<IUserRepository, UsuarioRepository>();
+            //services.AddScoped<IUsuarioService, UsuarioService>();
+
+            services.AddAutoMapper(typeof(MapperConfigureProfile));
+
+
            
             return services;
         }

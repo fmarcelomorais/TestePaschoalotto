@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Entity
+    public class Cordinates
     {
-        public Guid Identificado { get; set; }
-
-        public Entity()
-        {
-            Identificado = Guid.NewGuid();
-        }
+        public Guid Id { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
-
 }

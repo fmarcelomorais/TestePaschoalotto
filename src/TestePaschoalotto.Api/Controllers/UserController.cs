@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Text.Json;
-using TestePaschoalotto.Api.Service;
 using TestePaschoalotto.Application.DTOs;
 using TestePaschoalotto.Application.Interface;
 
@@ -10,8 +10,7 @@ namespace TestePaschoalotto.Api.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly IUsuarioService _usuarioService;
-   
+    private readonly IUsuarioService _usuarioService;   
     public UserController(IUsuarioService usuarioService)
     {
         _usuarioService = usuarioService;
@@ -25,12 +24,11 @@ public class UserController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("criar-usuario")]
-    public async Task<ActionResult> CriarUsuario() 
-    {       
-        var usuarioNovo = await RandomUserService.NovoUsuario(new HttpClient(), "https://randomuser.me/api/");
-        
-        return Ok(usuarioNovo);
+    [HttpPost("criar-usuario")]
+    public async Task<ActionResult> CriarUsuario(UsuarioDTOCreate usuario) 
+    {
+               
+        return Ok();
     }
 
 }

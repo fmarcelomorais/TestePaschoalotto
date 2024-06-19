@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Naturalization : Entity
+    public class Registered
     {
-        public string Nat { get; set; }
+        public Guid Id { get; set; }
+        public DateTime Date { get; set; }
+        public int Age { get; set; }
     }
 }

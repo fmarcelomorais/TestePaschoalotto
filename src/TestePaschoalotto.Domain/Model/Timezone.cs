@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Entity
+    public class Timezone
     {
-        public Guid Identificado { get; set; }
-
-        public Entity()
-        {
-            Identificado = Guid.NewGuid();
-        }
+        public Guid Id { get; set; }
+        public string Offset { get; set; }
+        public string Description { get; set; }
     }
-
 }

@@ -6,12 +6,18 @@ namespace TestePaschoalotto.Infraestrutura.Context
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Usuario> Users { get; set; }
+        public DbSet<Name> Names { get; set; }
         public DbSet<Login> Logins { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<Naturalization> Naturalizations { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Dob> Dobs { get; set; }
+       // public DbSet<Id> Ids { get; set; }
+        public DbSet<Street> Streets { get; set; }
+        public DbSet<Registered> Registereds { get; set; }
+        public DbSet<Timezone> Timezones { get; set; }
+        public DbSet<Cordinates> Cordinates { get; set; }   
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +35,7 @@ namespace TestePaschoalotto.Infraestrutura.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
+           // modelBuilder.Entity<Id>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }

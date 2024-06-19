@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TestePaschoalotto.Domain.Model;
 
-namespace TestePaschoalotto.Domain.Interface
+namespace TestePaschoalotto.Application.DTOs
 {
-    public interface IUserRepository : IRepository<Usuario>
+    public class TimezoneDTO
     {
-
+        public string Offset { get; set; }
+        public string Description { get; set; }
     }
 }

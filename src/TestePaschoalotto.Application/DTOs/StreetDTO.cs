@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TestePaschoalotto.Domain.Model;
 
-namespace TestePaschoalotto.Domain.Interface
+namespace TestePaschoalotto.Application.DTOs
 {
-    public interface INaturalizationRepository : IRepository<Naturalization>
+    public class StreetDTO
     {
+        public int Number { get; set; }
+        public string Name { get; set; }
     }
 }

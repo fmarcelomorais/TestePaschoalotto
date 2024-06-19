@@ -1,58 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace TestePaschoalotto.Domain.Model;
 
 public class Usuario
 {
-    public string Title { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+      
+    public Guid Id { get; set; }
     public string Gender { get; set; }
-    public DateTime DateUser { get; set; }
-    public int Age { get; set; }
-
-    /*Login*/
-
+    public Name Name { get; set; }
+    public Location Location { get; set; }
     public string Email { get; set; }
-    public Guid Uuid { get; set; }
-    public string UserName { get; set; }
-    public string Password { get; set; }
-    public string Salt { get; set; }
-    public string Md5 { get; set; }
-    public string Sha1 { get; set; }
-    public string Sha256 { get; set; }
-    public DateTime DateLogin { get; set; }
-    public int AgeLogin { get; set; }
-
-    /* Contact*/
+    public Login Login { get; set; }
+    public Dob Dob { get; set; }
+    public Registered Registered { get; set; }
     public string Phone { get; set; }
     public string Cell { get; set; }
-    public string Name { get; set; }
-    public string Value { get; set; }
+    public Picture Picture { get; set; }
 
-    /*Location*/
-    public string NameLocation { get; set; }
-    public string Number { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string Country { get; set; }
-    public string PostCode { get; set; }
-    public string Latitude { get; set; }
-    public string Longitude { get; set; }
-    public string OffSet { get; set; }
-    public string Description { get; set; }
+    public Guid NameId { get; set; }
+    public Guid LocationId { get; set; }
+    public Guid LoginId { get; set; }
+    public Guid DobId { get; set; }
+    public Guid RegisteredId { get; set; }
+    public Guid PictureId { get; set; }
+    public Guid CordinateId { get; set; }
 
-    /*Naturalization*/
-    public string Nat { get; set; }
-
-    /*Picture*/
-    public string Large { get; set; }
-    public string Medium { get; set; }
-    public string Thumbnail { get; set; }
-
-
+    public Usuario(Guid id, string gender, Name name, Location location, string email, Login login, Dob dob, Registered registered, string phone, string cell, Picture picture, Guid nameId, Guid locationId, Guid loginId, Guid dobId, Guid registeredId, Guid pictureId, Guid cordinateId)
+    {
+        Id = id;
+        Gender = gender;
+        Name = name;
+        Location = location;
+        Email = email;
+        Login = login;
+        Dob = dob;
+        Registered = registered;
+        Phone = phone;
+        Cell = cell;
+        Picture = picture;
+        NameId = nameId;
+        LocationId = locationId;
+        LoginId = loginId;
+        DobId = dobId;
+        RegisteredId = registeredId;
+        PictureId = pictureId;
+        CordinateId = cordinateId;
+    }
 }

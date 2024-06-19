@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestePaschoalotto.Infraestrutura.Context;
@@ -11,9 +12,11 @@ using TestePaschoalotto.Infraestrutura.Context;
 namespace TestePaschoalotto.Infraestrutura.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240619230735_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,6 +74,9 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.Property<Guid>("CodinatesId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("CordinatesId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("text");
@@ -89,6 +95,12 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CordinatesId");
+
+                    b.HasIndex("StreetId");
+
+                    b.HasIndex("TimezoneId");
 
                     b.ToTable("Locations");
                 });
@@ -273,7 +285,97 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DobId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("LoginId");
+
+                    b.HasIndex("NameId");
+
+                    b.HasIndex("PictureId");
+
+                    b.HasIndex("RegisteredId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Location", b =>
+                {
+                    b.HasOne("TestePaschoalotto.Domain.Model.Cordinates", "Cordinates")
+                        .WithMany()
+                        .HasForeignKey("CordinatesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Street", "Street")
+                        .WithMany()
+                        .HasForeignKey("StreetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Timezone", "Timezone")
+                        .WithMany()
+                        .HasForeignKey("TimezoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cordinates");
+
+                    b.Navigation("Street");
+
+                    b.Navigation("Timezone");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Usuario", b =>
+                {
+                    b.HasOne("TestePaschoalotto.Domain.Model.Dob", "Dob")
+                        .WithMany()
+                        .HasForeignKey("DobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Login", "Login")
+                        .WithMany()
+                        .HasForeignKey("LoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Name", "Name")
+                        .WithMany()
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TestePaschoalotto.Domain.Model.Registered", "Registered")
+                        .WithMany()
+                        .HasForeignKey("RegisteredId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dob");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Login");
+
+                    b.Navigation("Name");
+
+                    b.Navigation("Picture");
+
+                    b.Navigation("Registered");
                 });
 #pragma warning restore 612, 618
         }

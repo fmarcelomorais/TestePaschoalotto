@@ -12,8 +12,8 @@ using TestePaschoalotto.Infraestrutura.Context;
 namespace TestePaschoalotto.Infraestrutura.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240618201725_Initial")]
-    partial class Initial
+    [Migration("20240619230956_AjustaTabelas")]
+    partial class AjustaTabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,31 +25,40 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Contact", b =>
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Cordinates", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Cell")
+                    b.Property<string>("Latitude")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Value")
+                    b.Property<string>("Longitude")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Cordinates");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Dob", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dobs");
                 });
 
             modelBuilder.Entity("TestePaschoalotto.Domain.Model.Location", b =>
@@ -62,41 +71,25 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("CodinatesId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Latitude")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Longitude")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OffSet")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PostCode")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Postcode")
+                        .HasColumnType("integer");
 
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("StreetId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TimezoneId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -108,16 +101,6 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Md5")
                         .IsRequired()
@@ -139,7 +122,7 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -151,19 +134,27 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.ToTable("Logins");
                 });
 
-            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Naturalization", b =>
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Name", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Nat")
+                    b.Property<string>("First")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Last")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Nationalization");
+                    b.ToTable("Names");
                 });
 
             modelBuilder.Entity("TestePaschoalotto.Domain.Model.Picture", b =>
@@ -189,7 +180,7 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.ToTable("Pictures");
                 });
 
-            modelBuilder.Entity("TestePaschoalotto.Domain.Model.User", b =>
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Registered", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,21 +189,69 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FirstName")
+                    b.HasKey("Id");
+
+                    b.ToTable("Registereds");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Street", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Streets");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Timezone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Offset")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Timezones");
+                });
+
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Usuario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Cell")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("DobId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -222,72 +261,22 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.Property<Guid>("LoginId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("NaturalizationId")
+                    b.Property<Guid>("NameId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("PictureId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("RegisteredId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContactId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("LoginId");
-
-                    b.HasIndex("NaturalizationId");
-
-                    b.HasIndex("PictureId");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("TestePaschoalotto.Domain.Model.User", b =>
-                {
-                    b.HasOne("TestePaschoalotto.Domain.Model.Contact", "Contacts")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TestePaschoalotto.Domain.Model.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TestePaschoalotto.Domain.Model.Login", "Login")
-                        .WithMany()
-                        .HasForeignKey("LoginId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TestePaschoalotto.Domain.Model.Naturalization", "Naturalization")
-                        .WithMany()
-                        .HasForeignKey("NaturalizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TestePaschoalotto.Domain.Model.Picture", "Picture")
-                        .WithMany()
-                        .HasForeignKey("PictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Contacts");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Login");
-
-                    b.Navigation("Naturalization");
-
-                    b.Navigation("Picture");
                 });
 #pragma warning restore 612, 618
         }
