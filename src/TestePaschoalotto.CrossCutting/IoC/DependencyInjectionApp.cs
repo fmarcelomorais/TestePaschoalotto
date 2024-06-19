@@ -21,6 +21,7 @@ namespace TestePaschoalotto.CrossCutting.IoC
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IPictureRepository, PictureRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+           // services.AddScoped<IRandomUserService, RandomUserService>();
            
             return services;
         }

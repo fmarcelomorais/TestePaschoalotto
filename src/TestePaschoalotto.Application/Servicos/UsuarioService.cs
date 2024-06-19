@@ -27,6 +27,7 @@ namespace TestePaschoalotto.Application.Servicos
             _locationRepository = locationRepository;
             _loginRepository = loginRepository;
             _pictureRepository = pictureRepository;
+            _naturalizationRepository = naturalizationRepository;
         }
         public async Task CadastraUsuario(UsuarioDTOCreate usuarioDTO)
         {
@@ -90,9 +91,7 @@ namespace TestePaschoalotto.Application.Servicos
                 ContactId = contact.Id,
                 LocationId = location.Id,
                 NaturalizationId = naturalization.Id,
-                PictureId = picture.Id,
-
-                
+                PictureId = picture.Id,                
             };
 
             await _pictureRepository.Create(picture);
@@ -101,6 +100,21 @@ namespace TestePaschoalotto.Application.Servicos
             await _locationRepository.Create(location);
             await _contactRepository.Create(contact);
             await _userRepository.Create(user);
+        }
+
+        public Task EditarUsuario(UsuarioDTOCreate usuarioDTOCreate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<UsuarioDTO> ObterUsuarios()
+        {
+
+            var usuario = new UsuarioDTO
+            {
+
+            };
+            return usuario;
         }
     }
 }
