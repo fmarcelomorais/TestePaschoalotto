@@ -16,7 +16,7 @@ namespace TestePaschoalotto.Domain.Model
         public string Md5 { get; set; }
         public string Sha1 { get; set; }
         public string Sha256 { get; set; }
-        public DateTime Date { get; set; }
-        public int Age { get; set; }
+        public DateTime DateLogin { get; set; }
+        public int AgeLogin { get; set; }
     }
 }

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestePaschoalotto.Domain\TestePaschoalotto.Domain.csproj" />
+    <ProjectReference Include="..\TestePaschoalotto.Infraestrutura\TestePaschoalotto.Infraestrutura.csproj" />
+  </ItemGroup>
+
 </Project>

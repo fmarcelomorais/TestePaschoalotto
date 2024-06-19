@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestePaschoalotto.Application\TestePaschoalotto.Application.csproj" />
     <ProjectReference Include="..\TestePaschoalotto.Domain\TestePaschoalotto.Domain.csproj" />
     <ProjectReference Include="..\TestePaschoalotto.Infraestrutura\TestePaschoalotto.Infraestrutura.csproj" />
   </ItemGroup>

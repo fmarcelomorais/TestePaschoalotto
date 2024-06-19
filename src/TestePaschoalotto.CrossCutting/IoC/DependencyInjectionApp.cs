@@ -1,17 +1,27 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestePaschoalotto.Application.Interface;
+using TestePaschoalotto.Application.Servicos;
+using TestePaschoalotto.Domain.Interface;
+using TestePaschoalotto.Infraestrutura.Context;
+using TestePaschoalotto.Infraestrutura.Repositories;
+
+
 
 namespace TestePaschoalotto.CrossCutting.IoC
 {
     public static class DependencyInjectionApp
     {
-        public static IServiceCollection AddDependecyInjection(IServiceCollection services) 
+        public static IServiceCollection AddDependecyInjection(this IServiceCollection services) 
         {
-            
+            services.AddDbContext<ApplicationContext>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<INaturalizationRepository, NaturalizationRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IPictureRepository, PictureRepository>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+           
             return services;
         }
     }
