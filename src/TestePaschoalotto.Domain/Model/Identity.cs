@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Id    
-    {        
-        //public Guid Codigo { get; set; }
-        public string Name { get; set; }
-        [Key]
+    public class Identity  : Entity
+    {
+        public string Name { get; set; }       
         public string Value { get; set; }
 
     }

@@ -9,7 +9,7 @@ const criaUsuario = async function(){
     $(".btn-success").click(async function (e) { 
         e.preventDefault();
         
-        const novoUsuario = await getUser();
+        const novoUsuario = await getUserCreate();
         console.log(JSON.stringify(novoUsuario[0]))
         console.log(novoUsuario[0])
 
@@ -20,7 +20,6 @@ const criaUsuario = async function(){
             dataType: 'application/json',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
-
             },
             success: function (response) {
                alert(response) 
@@ -33,12 +32,20 @@ const criaUsuario = async function(){
     });
 }
 
-const getUser = async function(){
+const getUserCreate = async function(){
     const URL = "https://randomuser.me/api/";
     const request = await fetch(URL);
     const response = await request.json();
-   // console.log(response.results);
+    console.log(response.results);
     return response.results;
+
+}
+const getUser = async function(){
+    const URL = "https://localhost:7112/User";
+    const request = await fetch(URL);
+    const response = await request.json();
+    console.log(response);
+    return response;
 
 }
 

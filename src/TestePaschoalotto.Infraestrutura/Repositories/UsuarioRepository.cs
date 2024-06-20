@@ -26,10 +26,14 @@ namespace TestePaschoalotto.Infraestrutura.Repositories
                 .AsNoTracking()
                 .Include(name => name.Name)
                 .Include(location => location.Location)
+                .Include(coordinates => coordinates.Location.Coordinates)
+                .Include(street => street.Location.Street)
+                .Include(timezone => timezone.Location.Timezone)
                 .Include(login => login.Login)
                 .Include(dob => dob.Dob)
                 .Include(registered => registered.Registered)
                 .Include(picture => picture.Picture)
+                .Include(id => id.Identity)
                 .ToListAsync();
         }
 

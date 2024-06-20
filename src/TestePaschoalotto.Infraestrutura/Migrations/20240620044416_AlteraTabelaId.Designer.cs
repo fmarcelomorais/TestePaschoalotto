@@ -12,8 +12,8 @@ using TestePaschoalotto.Infraestrutura.Context;
 namespace TestePaschoalotto.Infraestrutura.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240620025153_AlteraTabelaLocation")]
-    partial class AlteraTabelaLocation
+    [Migration("20240620044416_AlteraTabelaId")]
+    partial class AlteraTabelaId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,16 +61,23 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.ToTable("Dobs");
                 });
 
-            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Id", b =>
+            modelBuilder.Entity("TestePaschoalotto.Domain.Model.Identity", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Value")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("Id");
+                    b.HasKey("Id");
+
+                    b.ToTable("Identity");
                 });
 
             modelBuilder.Entity("TestePaschoalotto.Domain.Model.Location", b =>
@@ -276,6 +283,9 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("IdentityId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uuid");
 
@@ -298,6 +308,8 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DobId");
+
+                    b.HasIndex("IdentityId");
 
                     b.HasIndex("LocationId");
 
@@ -347,6 +359,12 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TestePaschoalotto.Domain.Model.Identity", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TestePaschoalotto.Domain.Model.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId")
@@ -378,6 +396,8 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         .IsRequired();
 
                     b.Navigation("Dob");
+
+                    b.Navigation("Identity");
 
                     b.Navigation("Location");
 

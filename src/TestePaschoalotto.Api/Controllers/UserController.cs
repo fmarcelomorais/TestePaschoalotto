@@ -27,10 +27,14 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CriarUsuario(UsuarioDTO usuario) 
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         try
         {
             await _usuarioService.CadastraUsuario(usuario);       
-            return Ok("Usuario Criado com Sucesso!");
+            return Ok();
         }
         catch (Exception ex)
         {

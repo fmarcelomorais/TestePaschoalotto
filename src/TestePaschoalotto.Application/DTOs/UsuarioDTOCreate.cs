@@ -18,7 +18,7 @@ namespace TestePaschoalotto.Application.DTOs
         public Registered Registered { get; set; }
         public string Phone { get; set; }
         public string Cell { get; set; }
-        public Id Id { get; set; }
+        public Identity Id { get; set; }
         public Picture Picture { get; set; }
 
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TestePaschoalotto.Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class AlteraTabelaId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,19 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dobs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Value = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Identity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,16 +145,15 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     Country = table.Column<string>(type: "text", nullable: false),
                     Postcode = table.Column<int>(type: "integer", nullable: false),
                     StreetId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CodinatesId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TimezoneId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CordinatesId = table.Column<Guid>(type: "uuid", nullable: false)
+                    CoordinatesId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TimezoneId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Locations_Cordinates_CordinatesId",
-                        column: x => x.CordinatesId,
+                        name: "FK_Locations_Cordinates_CoordinatesId",
+                        column: x => x.CoordinatesId,
                         principalTable: "Cordinates",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -173,7 +185,9 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                     LoginId = table.Column<Guid>(type: "uuid", nullable: false),
                     DobId = table.Column<Guid>(type: "uuid", nullable: false),
                     RegisteredId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PictureId = table.Column<Guid>(type: "uuid", nullable: false)
+                    PictureId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CoordinateId = table.Column<Guid>(type: "uuid", nullable: false),
+                    IdentityId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,6 +196,12 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                         name: "FK_Users_Dobs_DobId",
                         column: x => x.DobId,
                         principalTable: "Dobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Users_Identity_IdentityId",
+                        column: x => x.IdentityId,
+                        principalTable: "Identity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -217,9 +237,9 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locations_CordinatesId",
+                name: "IX_Locations_CoordinatesId",
                 table: "Locations",
-                column: "CordinatesId");
+                column: "CoordinatesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_StreetId",
@@ -235,6 +255,11 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
                 name: "IX_Users_DobId",
                 table: "Users",
                 column: "DobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_IdentityId",
+                table: "Users",
+                column: "IdentityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_LocationId",
@@ -270,6 +295,9 @@ namespace TestePaschoalotto.Infraestrutura.Migrations
 
             migrationBuilder.DropTable(
                 name: "Dobs");
+
+            migrationBuilder.DropTable(
+                name: "Identity");
 
             migrationBuilder.DropTable(
                 name: "Locations");

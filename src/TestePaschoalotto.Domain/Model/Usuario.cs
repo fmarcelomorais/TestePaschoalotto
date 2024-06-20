@@ -19,8 +19,8 @@ public class Usuario : Entity
     public Registered Registered { get; set; }
     public string Phone { get; set; }
     public string Cell { get; set; }
-    public Picture Picture { get; set; }    
-    //public Id Id { get; set; }
+    public Picture Picture { get; set; }   
+    public Identity Identity { get; set; }
 
     public Guid NameId { get; set; }
     public Guid LocationId { get; set; }
@@ -29,5 +29,6 @@ public class Usuario : Entity
     public Guid RegisteredId { get; set; }
     public Guid PictureId { get; set; }
     public Guid CoordinateId { get; set; }
+    public Guid IdentityId { get; set; }
 
 }
