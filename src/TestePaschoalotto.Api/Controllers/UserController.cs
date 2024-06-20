@@ -24,6 +24,13 @@ public class UserController : ControllerBase
         return Ok(usuarios);
     }
 
+    [HttpGet("{filtro}")]
+    public async Task<ActionResult<UsuarioDTO>> GetUser(string filtro)
+    {
+        var usuario = await _usuarioService.ObterUsuario(filtro);
+        return Ok(usuario);
+    }
+
     [HttpPost]
     public async Task<ActionResult> CriarUsuario(UsuarioDTO usuario) 
     {

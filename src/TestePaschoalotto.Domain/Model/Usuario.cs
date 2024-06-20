@@ -10,6 +10,7 @@ namespace TestePaschoalotto.Domain.Model;
 
 public class Usuario : Entity
 {
+
     public string Gender { get; set; }
     public Name Name { get; set; }
     public Location Location { get; set; }

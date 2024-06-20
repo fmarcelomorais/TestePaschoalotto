@@ -9,6 +9,7 @@ namespace TestePaschoalotto.Application.DTOs
 {
     public class UsuarioDTO
     {
+        //public Guid Id { get; set; }
         public string Gender { get; set; }
         public NameDTO Name { get; set; }
         public LocationDTO Location { get; set; }

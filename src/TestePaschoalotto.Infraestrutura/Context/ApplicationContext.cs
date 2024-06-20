@@ -12,7 +12,7 @@ namespace TestePaschoalotto.Infraestrutura.Context
         public DbSet<Location> Locations { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Dob> Dobs { get; set; }
-       // public DbSet<Id> Ids { get; set; }
+        //public DbSet<Identity> Ids { get; set; }
         public DbSet<Street> Streets { get; set; }
         public DbSet<Registered> Registereds { get; set; }
         public DbSet<Timezone> Timezones { get; set; }

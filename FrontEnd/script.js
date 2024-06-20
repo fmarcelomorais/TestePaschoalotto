@@ -1,6 +1,7 @@
 $(document).ready(function () {
     carregarLista()
     criaUsuario();
+    //relatorio();
 });
 
 
@@ -44,9 +45,22 @@ const getUser = async function(){
     const URL = "https://localhost:7112/User";
     const request = await fetch(URL);
     const response = await request.json();
-    console.log(response);
+    //console.log(response);
     return response;
 
+}
+
+getUserRelatorio = () => {
+    const filtro = $(".btn-info").val()
+    $(".btn-info").click( async function (e) { 
+        e.preventDefault();
+        
+        const URL = `https://localhost:7112/User/${filtro}`;
+        const request = await fetch(URL);
+        const response = await request.json()
+        console.log(response)
+        //return response
+    });
 }
 
 const carregarLista = async function(){
@@ -61,17 +75,62 @@ const carregarLista = async function(){
             <td scope="row">${user.name.first}</td>
             <td>${user.name.last}</td>
             <td>
-                <button class="btn btn-info" value="${user.login.uuid}" ><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button class="btn btn-info" value="${user.login.username}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search" aria-hidden="true"></i></button>
                 <button class="btn btn-warning" value="${user.login.uuid}" ><i class="fa fa-edit" aria-hidden="true"></i></button>
                 <button class="btn btn-danger" value="${user.login.uuid}" ><i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
         </tr>
         `
         $(".dados").append(html);
-        const x = $(".btn-info").val()
-        //console.log(x)
+               
+        relatorio(response[0])
     })       
 }
+
+const relatorio = (usuario) => {
+    console.log(usuario)
+    const img= 'https://randomuser.me/api/portraits/women/75.jpg'
+   
+    let modal = 
+        `
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">${usuario.name.first} ${usuario.name.last}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="imagem">
+                        <img src="${usuario.picture.large}" alt="" srcset="">
+                    </div>
+                    <p>Titulo: ${usuario.name.title} </p>
+                    <p>Nome: ${usuario.name.first} </p>
+                    <p>Sobrenome: ${usuario.name.last}</p>
+                    <hr>
+                    <h3>Localização</h3>
+                    <p>CEP: ${usuario.location.postcode}</p>
+                    <p>Logradouro: ${usuario.location.street.name} - Nº ${usuario.location.street.number}</p>
+                    <p>Cidade: ${usuario.location.city} - Estado: ${usuario.location.state} Pais: ${usuario.location.country}</p>
+                    <hr>
+                    <h4>Dados de Login</h4>
+                    <h4>Login</h4>
+                    <p>Usuário: ${usuario.login.username}</p>
+                    <p>Senha: ${usuario.login.password}</p> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+                </div>
+            </div>
+       `
+       
+        $(".template-modal").append(modal);
+
+}
+
+
     
 /*
 "[
