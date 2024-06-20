@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Name
+    public class Name : Entity
     {
-        public Guid Id { get; set; }
+       
         public string Title { get; set; }
         public string First { get; set; }
         public string Last { get; set; }

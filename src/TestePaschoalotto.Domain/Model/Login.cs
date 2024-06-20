@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Login
+    public class Login : Entity
     {
-        public Guid Id { get; set; }
         public Guid Uuid { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

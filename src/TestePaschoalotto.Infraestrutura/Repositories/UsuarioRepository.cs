@@ -15,13 +15,22 @@ namespace TestePaschoalotto.Infraestrutura.Repositories
         }
         public async Task<Usuario> Create(Usuario entity)
         {
-            await _context.Users.AddAsync(entity); 
+            await _context.Users.AddAsync(entity);
+            _context.SaveChanges();
             return entity;
         }
 
         public async Task<List<Usuario>> GetAll()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .AsNoTracking()
+                .Include(name => name.Name)
+                .Include(location => location.Location)
+                .Include(login => login.Login)
+                .Include(dob => dob.Dob)
+                .Include(registered => registered.Registered)
+                .Include(picture => picture.Picture)
+                .ToListAsync();
         }
 
         public Task<Usuario> Update(Usuario entity)

@@ -24,6 +24,10 @@ const criaUsuario = async function(){
             },
             success: function (response) {
                alert(response) 
+            },
+            error: function (jqXHR, textStatus, errorThrown) { 
+                console.log(errorThrown)
+                
             }
         }); 
     });

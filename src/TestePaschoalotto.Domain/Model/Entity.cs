@@ -8,11 +8,11 @@ namespace TestePaschoalotto.Domain.Model
 {
     public class Entity
     {
-        public Guid Identificado { get; set; }
+        public Guid Id { get; set; }
 
         public Entity()
         {
-            Identificado = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
     }
 

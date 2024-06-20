@@ -35,7 +35,7 @@ namespace TestePaschoalotto.Infraestrutura.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
-           // modelBuilder.Entity<Id>().HasNoKey();
+            modelBuilder.Entity<Id>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }
     }

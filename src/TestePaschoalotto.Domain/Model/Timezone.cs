@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Timezone
+    public class Timezone : Entity
     {
-        public Guid Id { get; set; }
+        
         public string Offset { get; set; }
         public string Description { get; set; }
     }

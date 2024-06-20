@@ -20,15 +20,22 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        //var usuarios = await _usuarioService()
-        return Ok();
+        var usuarios = await _usuarioService.ObterUsuarios();
+        return Ok(usuarios);
     }
 
     [HttpPost]
     public async Task<ActionResult> CriarUsuario(UsuarioDTO usuario) 
     {
-        await _usuarioService.CadastraUsuario(usuario);       
-        return Ok();
+        try
+        {
+            await _usuarioService.CadastraUsuario(usuario);       
+            return Ok("Usuario Criado com Sucesso!");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
 }

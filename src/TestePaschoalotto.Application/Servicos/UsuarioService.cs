@@ -21,24 +21,64 @@ namespace TestePaschoalotto.Application.Servicos
         }
         public async Task CadastraUsuario(UsuarioDTO usuarioDTO)
         {
+
+            var name = _mapper.Map<Name>(usuarioDTO.Name);
+            var login = _mapper.Map<Login>(usuarioDTO.Login);
+            var dob = _mapper.Map<Dob>(usuarioDTO.Dob);
+            var registered = _mapper.Map<Registered>(usuarioDTO.Registered);
+            var id = _mapper.Map<Id>(usuarioDTO.Id);
+            var street = new Street
+            {
+                Number = usuarioDTO.Location.Street.Number,
+                Name = usuarioDTO.Location.Street.Name,
+            };
+            var coordinates = new Coordinates
+            {
+                Latitude = usuarioDTO.Location.Coordinates.Latitude,
+                Longitude = usuarioDTO.Location.Coordinates.Longitude,
+            };
+            var timezone = new Timezone
+            {
+                Offset = usuarioDTO.Location.Timezone.Offset,
+                Description = usuarioDTO.Location.Timezone.Description,
+            };
+            var location = new Location
+            {
+                City = usuarioDTO.Location.City,
+                State = usuarioDTO.Location.State,
+                Country = usuarioDTO.Location.Country,
+                Postcode = usuarioDTO.Location.Postcode,
+                Street = street,
+                Coordinates = coordinates,
+                Timezone = timezone
+                
+            };
+            var picture = _mapper.Map<Picture>(usuarioDTO.Picture);
+
             var usuario = new Usuario
             {
                 Gender = usuarioDTO.Gender,
-                Name = _mapper.Map<Name>(usuarioDTO.Name),
-                Location = _mapper.Map<Location>(usuarioDTO.Location),
+                Name = name,
+                Location = location,
                 Email = usuarioDTO.Email,
-                Login = _mapper.Map<Login>(usuarioDTO.Login),
-                Dob = _mapper.Map<Dob>(usuarioDTO.Dob),
-                Registered = _mapper.Map<Registered>(usuarioDTO.Registered),
+                Login = login,
+                Dob = dob,
+                Registered = registered,
                 Phone = usuarioDTO.Phone,
                 Cell = usuarioDTO.Cell,
-                Id = _mapper.Map<Id>(usuarioDTO.Id),
-                Picture = _mapper.Map<Picture>(usuarioDTO.Picture)
+                //Id = id,
+                Picture = picture,
+                CoordinateId = coordinates.Id,
+                DobId = dob.Id,
+                LocationId = location.Id,
+                LoginId = login.Id,
+                NameId = name.Id,
+                RegisteredId = registered.Id,
+                PictureId = picture.Id,
+                
+                
 
             };
-            
-
-
 
             await _userRepository.Create(usuario);
 

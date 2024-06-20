@@ -8,10 +8,8 @@ using System.Xml.Linq;
 
 namespace TestePaschoalotto.Domain.Model;
 
-public class Usuario
+public class Usuario : Entity
 {
-      
-    //public Guid Id { get; set; }
     public string Gender { get; set; }
     public Name Name { get; set; }
     public Location Location { get; set; }
@@ -21,8 +19,8 @@ public class Usuario
     public Registered Registered { get; set; }
     public string Phone { get; set; }
     public string Cell { get; set; }
-    public Picture Picture { get; set; }
-    public Id Id { get; set; }
+    public Picture Picture { get; set; }    
+    //public Id Id { get; set; }
 
     public Guid NameId { get; set; }
     public Guid LocationId { get; set; }
@@ -32,26 +30,4 @@ public class Usuario
     public Guid PictureId { get; set; }
     public Guid CoordinateId { get; set; }
 
-    //public Usuario(string gender, Name name, Location location, string email, Login login, Dob dob, Registered registered, string phone, string cell,
-    //    Picture picture, Guid nameId, Guid locationId, Guid loginId, Guid dobId, Guid registeredId, Guid pictureId, Guid coordinateId)
-    //{
-    //    Id = Id;
-    //    Gender = gender;
-    //    Name = name;
-    //    Location = location;
-    //    Email = email;
-    //    Login = login;
-    //    Dob = dob;
-    //    Registered = registered;
-    //    Phone = phone;
-    //    Cell = cell;
-    //    Picture = picture;
-    //    NameId = nameId;
-    //    LocationId = locationId;
-    //    LoginId = loginId;
-    //    DobId = dobId;
-    //    RegisteredId = registeredId;
-    //    PictureId = pictureId;
-    //    CoordinateId = coordinateId;
-    //}
 }

@@ -6,6 +6,7 @@ namespace TestePaschoalotto.Domain.Model
     {        
         //public Guid Codigo { get; set; }
         public string Name { get; set; }
+        [Key]
         public string Value { get; set; }
 
     }
