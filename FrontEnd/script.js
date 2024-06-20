@@ -140,7 +140,7 @@ const relatorio = (usuario) => {
                 <div class="modal-body">
 
                     <form>                    
-                        Nome<input type="text" class="form-group" name="" id="" value="${usuario.name.first}">
+                        Nome<input type="text" class="form-group" name="firstname" id="firstname" value="${usuario.name.first}">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -153,8 +153,16 @@ const relatorio = (usuario) => {
        
         $(".template-modal").append(modalEdit);
 
+        editarUsuario()
+
 }
 
+const editarUsuario = () => {
+    $(".btn-primary").click(function(e){
+        e.preventDefault;
+        alert($("#firstname").val())
+    })
+}
 
     
 /*
