@@ -16,7 +16,7 @@ namespace TestePaschoalotto.CrossCutting.IoC
         {
             services.AddDbContext<ApplicationContext>();
             services.AddScoped<IUserRepository, UsuarioRepository>();
-            //services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             services.AddAutoMapper(typeof(MapperConfigureProfile));
 

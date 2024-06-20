@@ -3,23 +3,29 @@ $(document).ready(function () {
     criaUsuario();
 });
 
+
 const criaUsuario = async function(){
 
     $(".btn-success").click(async function (e) { 
         e.preventDefault();
         
         const novoUsuario = await getUser();
+        console.log(JSON.stringify(novoUsuario[0]))
+        console.log(novoUsuario[0])
+
         $.ajax({
             type: "POST",
-            url: "https://localhost:7112/User/criar-usuario",
-            data: JSON.stringify(novoUsuario.results),
+            url: "https://localhost:7112/User",
+            data: JSON.stringify(novoUsuario[0]),
+            dataType: 'application/json',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
+
             },
             success: function (response) {
                alert(response) 
             }
-        });
+        }); 
     });
 }
 
@@ -28,7 +34,7 @@ const getUser = async function(){
     const request = await fetch(URL);
     const response = await request.json();
    // console.log(response.results);
-    return response;
+    return response.results;
 
 }
 
@@ -36,7 +42,7 @@ const carregarLista = async function(){
 
     const response = await getUser();
 
-    response.results.map(user => {
+    response.map(user => {
         let html =
         `
         <tr class="">

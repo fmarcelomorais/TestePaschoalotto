@@ -8,6 +8,7 @@ namespace TestePaschoalotto.Application.Mapper
     {
         public MapperConfigureProfile() 
         { 
+            CreateMap<UsuarioDTOCreate, Usuario>().ReverseMap();
             CreateMap<UsuarioDTO, Usuario>().ReverseMap();
         }
     }

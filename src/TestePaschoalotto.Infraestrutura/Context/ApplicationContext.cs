@@ -16,7 +16,7 @@ namespace TestePaschoalotto.Infraestrutura.Context
         public DbSet<Street> Streets { get; set; }
         public DbSet<Registered> Registereds { get; set; }
         public DbSet<Timezone> Timezones { get; set; }
-        public DbSet<Cordinates> Cordinates { get; set; }   
+        public DbSet<Coordinates> Cordinates { get; set; }   
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -24,10 +24,10 @@ public class UserController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("criar-usuario")]
-    public async Task<ActionResult> CriarUsuario(UsuarioDTOCreate usuario) 
+    [HttpPost]
+    public async Task<ActionResult> CriarUsuario(UsuarioDTO usuario) 
     {
-               
+        await _usuarioService.CadastraUsuario(usuario);       
         return Ok();
     }
 

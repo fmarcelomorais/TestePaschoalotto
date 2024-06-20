@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestePaschoalotto.Domain.Model
 {
-    public class Cordinates
+    public class Coordinates
     {
         public Guid Id { get; set; }
         public string Latitude { get; set; }

@@ -20,7 +20,7 @@ namespace TestePaschoalotto.Domain.Model
         public Guid TimezoneId { get; set; } //FK
 
         public Street Street { get; set; }
-        public Cordinates Cordinates { get; set; }
+        public Coordinates Coordinates { get; set; }
         public Timezone Timezone { get; set; }
 
 
