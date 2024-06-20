@@ -87,15 +87,16 @@ public class UsuarioService : IUsuarioService
 
     }
 
-    public Task EditarUsuario(UsuarioDTO usuarioDTOCreate)
+    public async Task EditarUsuario(UsuarioDTO usuarioDTO)
     {
-        throw new NotImplementedException();
+        var usuario = MapeiaUsuarioDTOaraUsuario(usuarioDTO);
+        await _userRepository.Update(usuario);
     }
 
     public async Task<UsuarioDTO> ObterUsuario(string filtro)
     {
         var usuario = await _userRepository.Find(u => u.Login.Username == filtro);
-        return MapeiaUsuarioDTOParaUsuario(usuario);
+        return MapeiaUsuarioParaUsuarioDTO(usuario);
     }
 
     public async Task<List<UsuarioDTO>> ObterUsuarios()
@@ -166,7 +167,7 @@ public class UsuarioService : IUsuarioService
         return lista;
     }
 
-    private UsuarioDTO MapeiaUsuarioDTOParaUsuario(Usuario usuario)
+    private UsuarioDTO MapeiaUsuarioParaUsuarioDTO(Usuario usuario)
     {
         var name = _mapper.Map<NameDTO>(usuario.Name);
         var login = _mapper.Map<LoginDTO>(usuario.Login);
@@ -229,5 +230,67 @@ public class UsuarioService : IUsuarioService
         return usuarioMapeado;
     }
 
+    private Usuario MapeiaUsuarioDTOaraUsuario(UsuarioDTO usuario)
+    {
+        var name = _mapper.Map<Name>(usuario.Name);
+        var login = _mapper.Map<Login>(usuario.Login);
+        var dob = _mapper.Map<Dob>(usuario.Dob);
+        var registered = _mapper.Map<Registered>(usuario.Registered);
+        var id = _mapper.Map<Identity>(usuario.Id);
+
+
+        var street = new Street
+        {
+            Number = usuario.Location.Street.Number,
+            Name = usuario.Location.Street.Name,
+        };
+        var coordinates = new Coordinates
+        {
+            Latitude = usuario.Location.Coordinates.Latitude,
+            Longitude = usuario.Location.Coordinates.Longitude,
+        };
+        var timezone = new Timezone
+        {
+            Offset = usuario.Location.Timezone.Offset,
+            Description = usuario.Location.Timezone.Description,
+        };
+        var location = new Location
+        {
+            City = usuario.Location.City,
+            State = usuario.Location.State,
+            Country = usuario.Location.Country,
+            Postcode = usuario.Location.Postcode,
+            Street = street,
+            Coordinates = coordinates,
+            Timezone = timezone
+
+        };
+        var picture = _mapper.Map<Picture>(usuario.Picture);
+
+        var usuarioMapeado = new Usuario
+        {
+            Gender = usuario.Gender,
+            Name = name,
+            Location = location,
+            Email = usuario.Email,
+            Login = login,
+            Dob = dob,
+            Registered = registered,
+            Phone = usuario.Phone,
+            Cell = usuario.Cell,
+            Identity = id,
+            Picture = picture,
+            //CoordinateId = coordinates.Id,
+            //DobId = dob.Id,
+            //LocationId = location.Id,
+            //LoginId = login.Id,
+            //NameId = name.Id,
+            //RegisteredId = registered.Id,
+            //PictureId = picture.Id,
+
+        };
+
+        return usuarioMapeado;
+    }
 
 }

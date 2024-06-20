@@ -49,4 +49,11 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPatch]
+    public async Task<ActionResult> EditarUsuario(UsuarioDTO usuarioDto)
+    {
+        var usuario = _usuarioService.EditarUsuario(usuarioDto);
+        return Ok(usuario);
+    }
+
 }

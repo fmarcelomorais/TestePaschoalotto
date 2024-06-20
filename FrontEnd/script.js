@@ -84,6 +84,7 @@ const carregarLista = async function(){
         $(".dados").append(html);
                
         relatorio(response[0])
+        //editarUsuario(response[0])
     })       
 }
 
@@ -120,7 +121,6 @@ const relatorio = (usuario) => {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
                 </div>
             </div>
@@ -153,14 +153,36 @@ const relatorio = (usuario) => {
        
         $(".template-modal").append(modalEdit);
 
-        editarUsuario()
+        editarUsuario(usuario)
 
 }
 
-const editarUsuario = () => {
-    $(".btn-primary").click(function(e){
+const editarUsuario = (usuario) => {
+    $(".btn-primary").click(async function(e){       
         e.preventDefault;
-        alert($("#firstname").val())
+
+        
+        console.log(usuario)
+        usuario.name.first = $("#firstname").val()
+
+        $.ajax({
+            type: "PATCH",
+            url: "https://localhost:7112/User",
+            data: JSON.stringify(usuario),
+            dataType: 'application/json',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            success: function (response) {
+               alert(response) 
+            },
+            error: function (jqXHR, textStatus, errorThrown) { 
+                console.log(errorThrown)
+                
+            }
+        }); 
+        
+        
     })
 }
 

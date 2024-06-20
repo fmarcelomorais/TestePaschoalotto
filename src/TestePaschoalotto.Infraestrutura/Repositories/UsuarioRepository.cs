@@ -54,9 +54,11 @@ namespace TestePaschoalotto.Infraestrutura.Repositories
                 .ToListAsync();
         }
 
-        public Task<Usuario> Update(Usuario entity)
+        public async Task<Usuario> Update(Usuario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry<Usuario>(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }
