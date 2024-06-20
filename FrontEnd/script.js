@@ -76,7 +76,7 @@ const carregarLista = async function(){
             <td>${user.name.last}</td>
             <td>
                 <button class="btn btn-info" value="${user.login.username}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-search" aria-hidden="true"></i></button>
-                <button class="btn btn-warning" value="${user.login.uuid}" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+                <button class="btn btn-warning" value="${user.login.username}" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fa fa-edit" aria-hidden="true"></i></button>
                 <button class="btn btn-danger" value="${user.login.uuid}" ><i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
         </tr>
@@ -84,6 +84,7 @@ const carregarLista = async function(){
         $(".dados").append(html);
                
         relatorio(response[0])
+        //editarUsuario(response[0])
     })       
 }
 
@@ -120,7 +121,6 @@ const relatorio = (usuario) => {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
                 </div>
             </div>
@@ -128,8 +128,63 @@ const relatorio = (usuario) => {
        
         $(".template-modal").append(modal);
 
+    let modalEdit = 
+        `
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel2">${usuario.name.first} ${usuario.name.last}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form>                    
+                        Nome<input type="text" class="form-group" name="firstname" id="firstname" value="${usuario.name.first}">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar</button> 
+                </div>
+                </div>
+            </div>
+       `
+       
+        $(".template-modal").append(modalEdit);
+
+        editarUsuario(usuario)
+
 }
 
+const editarUsuario = (usuario) => {
+    $(".btn-primary").click(async function(e){       
+        e.preventDefault;
+
+        
+        console.log(usuario)
+        usuario.name.first = $("#firstname").val()
+
+        $.ajax({
+            type: "PATCH",
+            url: "https://localhost:7112/User",
+            data: JSON.stringify(usuario),
+            dataType: 'application/json',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            success: function (response) {
+               alert(response) 
+            },
+            error: function (jqXHR, textStatus, errorThrown) { 
+                console.log(errorThrown)
+                
+            }
+        }); 
+        
+        
+    })
+}
 
     
 /*
