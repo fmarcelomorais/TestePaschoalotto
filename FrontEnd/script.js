@@ -13,23 +13,38 @@ const criaUsuario = async function(){
         console.log(JSON.stringify(novoUsuario[0]))
         console.log(novoUsuario[0])
 
-        $.ajax({
-            type: "POST",
-            url: "https://localhost:7112/User",
-            data: JSON.stringify(novoUsuario[0]),
-            dataType: 'application/json',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            success: function (response) {
-               alert(response) 
-            },
-            error: function (jqXHR, textStatus, errorThrown) { 
-                console.log(errorThrown)
-                
+
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "https://localhost:7112/User",
+                    data: JSON.stringify(novoUsuario[0]),
+                    dataType: 'application/json',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                });      
+                    
+                Swal.fire({
+                    icon: "success",
+                    title: "Usuário Criado",
+                    text: "Seu usuário foi criado.",
+                });  
+                    
+            } catch (error) {
+            
+                Swal.fire({
+                    icon: "error",
+                    title: "Tente novamente",
+                    text: "Pode ter sido apenas uma falha!",
+                });
             }
-        }); 
-    });
+            setTimeout(()=>{
+                location.reload()    
+            }, 2500)
+        }
+        
+    );
 }
 
 const getUserCreate = async function(){
@@ -46,7 +61,6 @@ async function getUsuarios(){
     const response = await request.json();
     return response
 }
-
 
 async function listaDeUsuarios(){
     
