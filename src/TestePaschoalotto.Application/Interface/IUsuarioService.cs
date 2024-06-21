@@ -7,7 +7,7 @@ namespace TestePaschoalotto.Application.Interface
     {
         Task CadastraUsuario(UsuarioDTO usuarioDTO);
         Task<List<UsuarioDTO>> ObterUsuarios();
-        Task EditarUsuario(UsuarioDTO usuarioDTO);
+        Task<UsuarioDTO> EditarUsuario(UsuarioDTO usuarioDTO);
         Task<UsuarioDTO> ObterUsuario(string filtro);
     }
 }

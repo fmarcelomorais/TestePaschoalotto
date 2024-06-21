@@ -8,7 +8,6 @@ namespace TestePaschoalotto.Application.DTOs
 {
     public class IdDTO
     {
-        public string Name { get; set; }
-        public string Value { get; set; }
+        public Guid Id { get; set; }
     }
 }

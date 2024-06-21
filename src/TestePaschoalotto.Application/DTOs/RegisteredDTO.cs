@@ -7,7 +7,7 @@ using TestePaschoalotto.Domain.Model;
 
 namespace TestePaschoalotto.Application.DTOs
 {
-    public class RegisteredDTO
+    public class RegisteredDTO : IdDTO
     {
         public DateTime Date { get; set; }
         public int Age { get; set; }

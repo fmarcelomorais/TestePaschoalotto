@@ -8,7 +8,7 @@ using TestePaschoalotto.Domain.Model;
 
 namespace TestePaschoalotto.Application.DTOs
 {
-    public class CoordinatesDTO 
+    public class CoordinatesDTO : IdDTO
     {
         public string Latitude { get; set; }
         public string Longitude { get; set; }

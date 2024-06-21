@@ -7,9 +7,8 @@ using TestePaschoalotto.Domain.Model;
 
 namespace TestePaschoalotto.Application.DTOs
 {
-    public class UsuarioDTO
+    public class UsuarioDTO 
     {
-        //public Guid Id { get; set; }
         public string Gender { get; set; }
         public NameDTO Name { get; set; }
         public LocationDTO Location { get; set; }
@@ -19,7 +18,16 @@ namespace TestePaschoalotto.Application.DTOs
         public RegisteredDTO Registered { get; set; }
         public string Phone { get; set; }
         public string Cell { get; set; }
-        public IdDTO Id { get; set; }
+        public IdentityDTO Id { get; set; }
         public PictureDTO Picture { get; set; }
+
+        public Guid NameId { get; set; }
+        public Guid LocationId { get; set; }
+        public Guid LoginId { get; set; }
+        public Guid DobId { get; set; }
+        public Guid RegisteredId { get; set; }
+        public Guid PictureId { get; set; }
+        public Guid CoordinateId { get; set; }
+        public Guid IdentityId { get; set; }
     }
 }
