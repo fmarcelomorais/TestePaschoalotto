@@ -29,7 +29,7 @@ public class UsuarioService : IUsuarioService
         var login = _mapper.Map<Login>(usuarioDTO.Login);
         var dob = _mapper.Map<Dob>(usuarioDTO.Dob);
         var registered = _mapper.Map<Registered>(usuarioDTO.Registered);
-        var id = _mapper.Map<Identity>(usuarioDTO.Id);
+        var identity = _mapper.Map<Identity>(usuarioDTO.Id);
 
 
         var street = new Street
@@ -62,6 +62,7 @@ public class UsuarioService : IUsuarioService
 
         var usuario = new Usuario
         {
+           // Id = usuarioDTO.Id,
             Gender = usuarioDTO.Gender,
             Name = name,
             Location = location,
@@ -71,7 +72,7 @@ public class UsuarioService : IUsuarioService
             Registered = registered,
             Phone = usuarioDTO.Phone,
             Cell = usuarioDTO.Cell,
-            Identity = id,
+            Identity = identity,
             Picture = picture,
             CoordinateId = coordinates.Id,
             DobId = dob.Id,
@@ -87,10 +88,12 @@ public class UsuarioService : IUsuarioService
 
     }
 
-    public async Task EditarUsuario(UsuarioDTO usuarioDTO)
+    public async Task<UsuarioDTO> EditarUsuario(UsuarioDTO usuarioDTO)
     {
-        var usuario = MapeiaUsuarioDTOaraUsuario(usuarioDTO);
-        await _userRepository.Update(usuario);
+        var usuario = MapeiaUsuarioDTOParaUsuario(usuarioDTO);
+
+        return MapeiaUsuarioParaUsuarioDTO( await _userRepository.Update(usuario) );
+        
     }
 
     public async Task<UsuarioDTO> ObterUsuario(string filtro)
@@ -115,7 +118,7 @@ public class UsuarioService : IUsuarioService
             var login = _mapper.Map<LoginDTO>(item.Login);
             var dob = _mapper.Map<DobDTO>(item.Dob);
             var registered = _mapper.Map<RegisteredDTO>(item.Registered);
-            var identity = _mapper.Map<IdDTO>(item.Identity);
+            var identity = _mapper.Map<IdentityDTO>(item.Identity);
 
 
             var street = new StreetDTO
@@ -148,6 +151,7 @@ public class UsuarioService : IUsuarioService
 
             var usuario = new UsuarioDTO
             {
+                //Id = item.Id,
                 Gender = item.Gender,
                 Name = name,
                 Location = location,
@@ -173,26 +177,30 @@ public class UsuarioService : IUsuarioService
         var login = _mapper.Map<LoginDTO>(usuario.Login);
         var dob = _mapper.Map<DobDTO>(usuario.Dob);
         var registered = _mapper.Map<RegisteredDTO>(usuario.Registered);
-        var id = _mapper.Map<IdDTO>(usuario.Identity);
+        var identity = _mapper.Map<IdentityDTO>(usuario.Identity);
 
 
         var street = new StreetDTO
         {
+            //Id = usuario.Location.Street.Id,
             Number = usuario.Location.Street.Number,
             Name = usuario.Location.Street.Name,
         };
         var coordinates = new CoordinatesDTO
         {
+            //Id = usuario.Location.Coordinates.Id,
             Latitude = usuario.Location.Coordinates.Latitude,
             Longitude = usuario.Location.Coordinates.Longitude,
         };
         var timezone = new TimezoneDTO
         {
+            //Id = usuario.Location.Timezone.Id,
             Offset = usuario.Location.Timezone.Offset,
             Description = usuario.Location.Timezone.Description,
         };
         var location = new LocationDTO
         {
+            Id = usuario.Location.Id,
             City = usuario.Location.City,
             State = usuario.Location.State,
             Country = usuario.Location.Country,
@@ -206,6 +214,7 @@ public class UsuarioService : IUsuarioService
 
         var usuarioMapeado = new UsuarioDTO
         {
+            //Id = usuario.Id,
             Gender = usuario.Gender,
             Name = name,
             Location = location,
@@ -215,47 +224,52 @@ public class UsuarioService : IUsuarioService
             Registered = registered,
             Phone = usuario.Phone,
             Cell = usuario.Cell,
-            Id = id,
+            Id = identity,
             Picture = picture,
-            //CoordinateId = coordinates.Id,
-            //DobId = dob.Id,
-            //LocationId = location.Id,
-            //LoginId = login.Id,
-            //NameId = name.Id,
-            //RegisteredId = registered.Id,
-            //PictureId = picture.Id,
+            CoordinateId = coordinates.Id,
+            DobId = dob.Id,
+            LocationId = location.Id,
+            LoginId = login.Id,
+            NameId = name.Id,
+            //IdentityId = identity.Id,
+            RegisteredId = registered.Id,
+            PictureId = picture.Id,
 
         };
 
         return usuarioMapeado;
     }
 
-    private Usuario MapeiaUsuarioDTOaraUsuario(UsuarioDTO usuario)
+    private Usuario MapeiaUsuarioDTOParaUsuario(UsuarioDTO usuario)
     {
         var name = _mapper.Map<Name>(usuario.Name);
         var login = _mapper.Map<Login>(usuario.Login);
         var dob = _mapper.Map<Dob>(usuario.Dob);
         var registered = _mapper.Map<Registered>(usuario.Registered);
-        var id = _mapper.Map<Identity>(usuario.Id);
+        var identity = _mapper.Map<Identity>(usuario.Id);
 
 
         var street = new Street
         {
+            //Id = usuario.Location.Street.Id,
             Number = usuario.Location.Street.Number,
             Name = usuario.Location.Street.Name,
         };
         var coordinates = new Coordinates
         {
+            //Id = usuario.Location.Coordinates.Id,
             Latitude = usuario.Location.Coordinates.Latitude,
             Longitude = usuario.Location.Coordinates.Longitude,
         };
         var timezone = new Timezone
         {
+            //Id = usuario.Location.Timezone.Id,
             Offset = usuario.Location.Timezone.Offset,
             Description = usuario.Location.Timezone.Description,
         };
         var location = new Location
         {
+            Id = usuario.Location.Id,
             City = usuario.Location.City,
             State = usuario.Location.State,
             Country = usuario.Location.Country,
@@ -269,6 +283,7 @@ public class UsuarioService : IUsuarioService
 
         var usuarioMapeado = new Usuario
         {
+            //Id = usuario.Id,
             Gender = usuario.Gender,
             Name = name,
             Location = location,
@@ -278,15 +293,16 @@ public class UsuarioService : IUsuarioService
             Registered = registered,
             Phone = usuario.Phone,
             Cell = usuario.Cell,
-            Identity = id,
+            Identity = identity,
             Picture = picture,
-            //CoordinateId = coordinates.Id,
-            //DobId = dob.Id,
-            //LocationId = location.Id,
-            //LoginId = login.Id,
-            //NameId = name.Id,
-            //RegisteredId = registered.Id,
-            //PictureId = picture.Id,
+            CoordinateId = coordinates.Id,
+            DobId = dob.Id,
+            LocationId = location.Id,
+            LoginId = login.Id,
+            NameId = name.Id,
+            //IdentityId = identity.Id,
+            RegisteredId = registered.Id,
+            PictureId = picture.Id,
 
         };
 

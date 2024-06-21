@@ -7,7 +7,7 @@ using TestePaschoalotto.Domain.Model;
 
 namespace TestePaschoalotto.Application.DTOs
 {
-    public class NameDTO
+    public class NameDTO : IdDTO
     {
         public string Title { get; set; }
         public string First { get; set; }

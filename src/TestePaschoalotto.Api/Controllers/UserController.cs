@@ -18,7 +18,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<UsuarioDTO>> GetAll()
     {
         var usuarios = await _usuarioService.ObterUsuarios();
         return Ok(usuarios);
@@ -50,9 +50,9 @@ public class UserController : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<ActionResult> EditarUsuario(UsuarioDTO usuarioDto)
+    public async Task<IActionResult> EditarUsuario(UsuarioDTO usuarioDto)
     {
-        var usuario = _usuarioService.EditarUsuario(usuarioDto);
+        var usuario = await _usuarioService.EditarUsuario(usuarioDto);
         return Ok(usuario);
     }
 

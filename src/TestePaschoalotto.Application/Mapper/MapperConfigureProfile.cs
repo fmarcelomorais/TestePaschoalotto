@@ -15,7 +15,7 @@ namespace TestePaschoalotto.Application.Mapper
             CreateMap<LoginDTO, Login>().ReverseMap();
             CreateMap<DobDTO, Dob>().ReverseMap();
             CreateMap<RegisteredDTO, Registered>().ReverseMap();
-            CreateMap<IdDTO, Identity>().ReverseMap();
+            CreateMap<IdentityDTO, Identity>().ReverseMap();
             CreateMap<PictureDTO, Picture>().ReverseMap();
         }
     }
