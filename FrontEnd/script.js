@@ -153,10 +153,21 @@ async function editar(){
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-        
-                        <form>                    
-                            Nome<input type="text" class="form-group" name="firstname" id="firstname" value="${usuario.name.first}">
-                        </form>
+                        <div class="imagem mt-2 mb-3">
+                            <img src="${usuario.picture.large}" alt="" srcset="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Nome</label>
+                            <input
+                                type="text"
+                                name="firstname"
+                                id="firstname"
+                                class="form-control"
+                                placeholder=""
+                                aria-describedby="helpId"
+                                value="${usuario.name.first}"
+                            />
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
