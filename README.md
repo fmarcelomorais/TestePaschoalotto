@@ -55,6 +55,9 @@ cd TestePaschoalotto
 ```bash
 .Net 8
 ```
+```bash
+npm install
+```
 
 
 ## Configuração da API
