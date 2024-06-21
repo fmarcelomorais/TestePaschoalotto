@@ -48,7 +48,7 @@ com funcionalidades de Cadastrar, Editar e Listar todos os Usuários. Este proje
 1. Clone o repositório
 ```bash
 git clone https://github.com/fmarcelomorais/TestePaschoalotto.git
-cd [nome-do-app]
+cd TestePaschoalotto
 ```
 
 2. Instale as dependências
