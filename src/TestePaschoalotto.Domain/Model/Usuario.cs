@@ -11,16 +11,16 @@ namespace TestePaschoalotto.Domain.Model;
 public class Usuario : Entity
 {
     public string Gender { get; set; }
-    public Name Name { get; set; }
-    public Location Location { get; set; }
+    public Name? Name { get; set; }
+    public Location? Location { get; set; }
     public string Email { get; set; }
-    public Login Login { get; set; }
-    public Dob Dob { get; set; }
-    public Registered Registered { get; set; }
+    public Login? Login { get; set; }
+    public Dob? Dob { get; set; }
+    public Registered? Registered { get; set; }
     public string Phone { get; set; }
     public string Cell { get; set; }
-    public Picture Picture { get; set; }   
-    public Identity Identity { get; set; }
+    public Picture? Picture { get; set; }   
+    public Identity? Identity { get; set; }
 
     public Guid NameId { get; set; }
     public Guid LocationId { get; set; }
@@ -30,5 +30,6 @@ public class Usuario : Entity
     public Guid PictureId { get; set; }
     public Guid CoordinateId { get; set; }
     public Guid IdentityId { get; set; }
+
 
 }

@@ -52,8 +52,12 @@ public class UserController : ControllerBase
     [HttpPatch]
     public async Task<IActionResult> EditarUsuario(UsuarioDTO usuarioDto)
     {
-        var usuario = await _usuarioService.EditarUsuario(usuarioDto);
-        return Ok(usuario);
+        if(ModelState.IsValid)
+        {
+            var usuario = await _usuarioService.EditarUsuario(usuarioDto);
+            return Ok(usuario);
+        }
+            return BadRequest();
     }
 
 }
