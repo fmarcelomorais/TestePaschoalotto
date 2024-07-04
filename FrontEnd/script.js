@@ -10,39 +10,36 @@ const criaUsuario = async function(){
         e.preventDefault();
         
         const novoUsuario = await getUserCreate();
-        console.log(JSON.stringify(novoUsuario[0]))
-        console.log(novoUsuario[0])
 
-
-            try {
-                $.ajax({
-                    type: "POST",
-                    url: "https://localhost:7112/User",
-                    data: JSON.stringify(novoUsuario[0]),
-                    dataType: 'application/json',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8'
-                    },
-                });      
-                    
-                Swal.fire({
-                    icon: "success",
-                    title: "Usuário Criado",
-                    text: "Seu usuário foi criado.",
-                });  
-                    
-            } catch (error) {
-            
-                Swal.fire({
-                    icon: "error",
-                    title: "Tente novamente",
-                    text: "Pode ter sido apenas uma falha!",
-                });
-            }
-            setTimeout(()=>{
-                location.reload()    
-            }, 2500)
+        try {
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:7112/User",
+                data: JSON.stringify(novoUsuario[0]),
+                dataType: 'application/json',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+            });      
+                
+            Swal.fire({
+                icon: "success",
+                title: "Usuário Criado",
+                text: "Seu usuário foi criado.",
+            });  
+                
+        } catch (error) {
+        
+            Swal.fire({
+                icon: "error",
+                title: "Tente novamente",
+                text: "Pode ter sido apenas uma falha!",
+            });
         }
+        setTimeout(()=>{
+            location.reload()    
+        }, 2500)
+    }
         
     );
 }
@@ -51,7 +48,7 @@ const getUserCreate = async function(){
     const URL = "https://randomuser.me/api/";
     const request = await fetch(URL);
     const response = await request.json();
-    console.log(response.results);
+
     return response.results;
 
 }
@@ -130,7 +127,8 @@ async function relatorio(){
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     </div>`
-                    $modal.innerHTML = modal        
+
+                $modal.innerHTML = modal        
         });
     })
 } 
@@ -170,7 +168,7 @@ async function editar(){
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-secondary" id="fechar" data-bs-dismiss="modal">Fechar</button>
                         <button type="button" class="btn btn-primary">Salvar</button> 
                     </div>
            `
@@ -181,32 +179,43 @@ async function editar(){
     })
     
 }
+
 async function editarUsuario (usuario) {
+
     $(".btn-primary").click(async function(e){       
         e.preventDefault;
 
-        
-        console.log(usuario)
-
         usuario.name.first = $("#firstname").val()
 
-        $.ajax({
-            type: "PATCH",
-            url: "https://localhost:7112/User",
-            data: JSON.stringify(usuario),
-            dataType: 'application/json',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            success: function (response) {
-               alert(response) 
-            },
-            error: function (jqXHR, textStatus, errorThrown) { 
-                console.log(errorThrown)
-                
-            }
-        }); 
+        try {
+            $.ajax({
+                type: "PATCH",
+                url: "https://localhost:7112/User",
+                data: JSON.stringify(usuario),
+                dataType: 'application/json',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            })
+            Swal.fire({
+                icon: "success",
+                title: "Usuário Alterado",
+                text: "Seu usuário foi Alterado.",
+            });  
+           
+            
+        } catch (error) {
+            
+            Swal.fire({
+                icon: "error",
+                title: "Tente novamente",
+                text: "Pode ter sido apenas uma falha!",
+            });                
+        }    
         
-        
+    })
+
+    $("#fechar").click(function (e) {      
+        location.reload(); 
     })
 }

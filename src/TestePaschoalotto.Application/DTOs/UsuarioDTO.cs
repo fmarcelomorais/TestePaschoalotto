@@ -9,17 +9,18 @@ namespace TestePaschoalotto.Application.DTOs
 {
     public class UsuarioDTO 
     {
+        public Guid Id { get; set; }
         public string Gender { get; set; }
-        public NameDTO Name { get; set; }
-        public LocationDTO Location { get; set; }
+        public NameDTO? Name { get; set; }
+        public LocationDTO? Location { get; set; }
         public string Email { get; set; }
-        public LoginDTO Login { get; set; }
-        public DobDTO Dob { get; set; }
-        public RegisteredDTO Registered { get; set; }
+        public LoginDTO? Login { get; set; }
+        public DobDTO? Dob { get; set; }
+        public RegisteredDTO? Registered { get; set; }
         public string Phone { get; set; }
         public string Cell { get; set; }
-        public IdentityDTO Id { get; set; }
-        public PictureDTO Picture { get; set; }
+        public IdentityDTO? Identity { get; set; }
+        public PictureDTO? Picture { get; set; }
 
         public Guid NameId { get; set; }
         public Guid LocationId { get; set; }

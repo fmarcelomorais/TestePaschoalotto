@@ -161,7 +161,7 @@ public class UsuarioService : IUsuarioService
                 Registered = registered,
                 Phone = item.Phone,
                 Cell = item.Cell,
-                Id = identity,
+                Identity = identity,
                 Picture = picture
             };
         
@@ -182,19 +182,19 @@ public class UsuarioService : IUsuarioService
 
         var street = new StreetDTO
         {
-            //Id = usuario.Location.Street.Id,
+            Id = usuario.Location.Street.Id,
             Number = usuario.Location.Street.Number,
             Name = usuario.Location.Street.Name,
         };
         var coordinates = new CoordinatesDTO
         {
-            //Id = usuario.Location.Coordinates.Id,
+            Id = usuario.Location.Coordinates.Id,
             Latitude = usuario.Location.Coordinates.Latitude,
             Longitude = usuario.Location.Coordinates.Longitude,
         };
         var timezone = new TimezoneDTO
         {
-            //Id = usuario.Location.Timezone.Id,
+            Id = usuario.Location.Timezone.Id,
             Offset = usuario.Location.Timezone.Offset,
             Description = usuario.Location.Timezone.Description,
         };
@@ -224,14 +224,14 @@ public class UsuarioService : IUsuarioService
             Registered = registered,
             Phone = usuario.Phone,
             Cell = usuario.Cell,
-            Id = identity,
+            Identity = identity,
             Picture = picture,
             CoordinateId = coordinates.Id,
             DobId = dob.Id,
             LocationId = location.Id,
             LoginId = login.Id,
             NameId = name.Id,
-            //IdentityId = identity.Id,
+            IdentityId = identity.Id,
             RegisteredId = registered.Id,
             PictureId = picture.Id,
 
@@ -246,24 +246,24 @@ public class UsuarioService : IUsuarioService
         var login = _mapper.Map<Login>(usuario.Login);
         var dob = _mapper.Map<Dob>(usuario.Dob);
         var registered = _mapper.Map<Registered>(usuario.Registered);
-        var identity = _mapper.Map<Identity>(usuario.Id);
+        var identity = _mapper.Map<Identity>(usuario.Identity);
 
 
         var street = new Street
         {
-            //Id = usuario.Location.Street.Id,
+            Id = usuario.Location.Street.Id,
             Number = usuario.Location.Street.Number,
             Name = usuario.Location.Street.Name,
         };
         var coordinates = new Coordinates
         {
-            //Id = usuario.Location.Coordinates.Id,
+            Id = usuario.Location.Coordinates.Id,
             Latitude = usuario.Location.Coordinates.Latitude,
             Longitude = usuario.Location.Coordinates.Longitude,
         };
         var timezone = new Timezone
         {
-            //Id = usuario.Location.Timezone.Id,
+            Id = usuario.Location.Timezone.Id,
             Offset = usuario.Location.Timezone.Offset,
             Description = usuario.Location.Timezone.Description,
         };
@@ -283,7 +283,7 @@ public class UsuarioService : IUsuarioService
 
         var usuarioMapeado = new Usuario
         {
-            //Id = usuario.Id,
+            Id = usuario.Id,
             Gender = usuario.Gender,
             Name = name,
             Location = location,
@@ -300,7 +300,7 @@ public class UsuarioService : IUsuarioService
             LocationId = location.Id,
             LoginId = login.Id,
             NameId = name.Id,
-            //IdentityId = identity.Id,
+            IdentityId = identity.Id,
             RegisteredId = registered.Id,
             PictureId = picture.Id,
 

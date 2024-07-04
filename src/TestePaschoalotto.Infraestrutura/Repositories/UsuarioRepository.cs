@@ -56,7 +56,8 @@ namespace TestePaschoalotto.Infraestrutura.Repositories
 
         public async Task<Usuario> Update(Usuario entity)
         {
-            _context.Entry<Usuario>(entity).State = EntityState.Modified;
+            
+            _context.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

@@ -10,6 +10,7 @@ namespace TestePaschoalotto.Application.DTOs
 {
     public class CoordinatesDTO : IdDTO
     {
+        public Guid Id { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
     }
